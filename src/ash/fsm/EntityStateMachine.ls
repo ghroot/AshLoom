@@ -74,18 +74,15 @@ package ash.fsm
 			}
 			var toAdd : Dictionary.<Type, IComponentProvider>;
 			var type : Type;
-			var t : Object;
 			if ( currentState )
 			{
 				toAdd = new Dictionary.<Type, IComponentProvider>();
-				for( t in newState.providers )
+				for( type in newState.providers )
 				{
-					type = t.getType();
 					toAdd[ type ] = newState.providers[ type ];
 				}
-				for( t in currentState.providers )
+				for( type in currentState.providers )
 				{
-					type = t.getType();
 					var other : IComponentProvider = toAdd[ type ];
 
 					if ( other && other.identifier == currentState.providers[ type ].identifier )
@@ -102,9 +99,8 @@ package ash.fsm
 			{
 				toAdd = newState.providers;
 			}
-			for( t in toAdd )
+			for( type in toAdd )
 			{
-				type = t.getType();
 				entity.add( IComponentProvider( toAdd[ type ] ).getComponent(), type );
 			}
 			currentState = newState;
